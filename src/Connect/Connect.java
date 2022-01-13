@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Vector;
 
 public class Connect {
 	private Connection connection = getConnect();
@@ -43,6 +44,31 @@ public class Connect {
 			// TODO: handle exception
 		}
 		return user;
+	}
+	public Vector getUser(){
+		Vector vD = new Vector();
+		try {
+			String sql = "SELECT* FROM user";
+			PreparedStatement stm = connection.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Vector t = new Vector();
+				t.add(rs.getString(1));
+				t.add(rs.getString(2));
+				t.add(rs.getString(3));
+				t.add(rs.getString(4));
+				t.add(rs.getString(5));
+				t.add(rs.getString(6));
+				t.add(rs.getString(7));
+				t.add(rs.getString(8));
+				t.add(rs.getString(9));
+				vD.add(t);
+				System.out.println("oke");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return vD;
 		
 	}
 }
